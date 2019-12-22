@@ -143,26 +143,26 @@ ClipChange(Type) {
 		StringLeft strRequestId, strPossibleRequestId, 15
 		strRequestId := RegExReplace(strRequestId, "^[2-3]", "1",,1)
 		ToolTip This looks like an problem/task number: %strPossibleRequestId%`n%strMsgActionsSDProblem%`n%strMsgActionPaste%
-		strRequestType := "SD")
-	} else if (RegExMatch(clipContent, "[1][1]\d{13}"), strPossibleRequestId)) { ;MSSolve case
+		strRequestType := "SD"
+	} else if (RegExMatch(clipContent, "[1][1]\d{13}", strPossibleRequestId)) { ;MSSolve case
 		ToolTip This looks like an SR number: %strPossibleRequestId%`n%strMsgActionsSDCase%`n%strMsgActionPaste%
-		strRequestType := "SD")
+		strRequestType := "SD"
 		strRequestId := strPossibleRequestId
 	} else if (RegExMatch(clipContent, "(\+\d{1,3}|8)[\s.-]?\(?\d{2,3}\)?[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2,3}", strPossibleRequestId)) { ;phone number
 		;TODO: clear formatting in phone number
 		ToolTip This looks like a phone number: %strPossibleRequestId%`n%strMsgActionsPhone%`n%strMsgActionPaste%
-		strRequestType := "Phone")
+		strRequestType := "Phone"
 		strRequestId := strPossibleRequestId
 	} else if (RegExMatch(clipContent, "\b[1]\d{7}\b", strPossibleRequestId)) { ;Rave case
 		ToolTip This looks like a Rave case: %strPossibleRequestId%`n%strMsgActionsRave%`n%strMsgActionPaste%
-		strRequestType := "Rave")
+		strRequestType := "Rave"
 		strRequestId := strPossibleRequestId
 	} else if (RegExMatch(clipContent, "0[xX][0-9a-fA-F]{1,8}", strPossibleRequestId)) { ;0xZZZZZZZZ error code
 		if(intLocalErrors) {
 			GetErrorDesc(strPossibleRequestId)
 		}
 		ToolTip This looks like an error code: %strPossibleRequestId%`n%strRequestDesc%`n%strMsgActionsErrors%`n%strMsgActionPaste%
-		strRequestType := "Errors")
+		strRequestType := "Errors"
 		strRequestId := strPossibleRequestId
 	} else if (RegExMatch(clipContent, "Tenant Id:\s*([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})", strPossibleRequestId)) { ;Tenant ID, copied from case details
 		if(strPossibleRequestId1 = "f8cdef31-a31e-4b4a-93e4-5f571e91255a") {
@@ -172,7 +172,7 @@ ClipChange(Type) {
 		}
 		ToolTip This looks like a Tenant ID: %strPossibleRequestId1%%strRequestDesc%`n%strMsgActionsRave%`n%strMsgActionPaste%
 		;BUG: ctrl+shift combo gets stuck when trying to Ctrl+Shift+V this
-		strRequestType := "TenantID")
+		strRequestType := "TenantID"
 		strRequestId := strPossibleRequestId1
 	} else if (RegExMatch(clipContent, "(Date\s(.*))|(Correlation Id\s*([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))", strPossibleRequestId)) { ;eSTS correlation ID from ASC
 		;;;; Completely unfinished. Another regex is below, If I remember correctly this one supports both eSTS message format (ie what you see in the error page) and ASC
@@ -180,7 +180,7 @@ ClipChange(Type) {
 		; group 2 - date
 		; group 4 - correlation id
 		; group 6 - timestamp
-		strRequestType := "eSTS")
+		strRequestType := "eSTS"
 		ToolTip This looks like is an evoSTS correlation ID from ASC, but these are not yet supported
 	} else {
 		ToolTip
