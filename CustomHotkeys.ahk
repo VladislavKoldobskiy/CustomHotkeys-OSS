@@ -139,12 +139,7 @@ return
 ClipChange(Type) {
 	intTooltipShown := 1
 	clipContent := clipboard
-	if (RegExMatch(clipContent, "[2-3][1]\d{16}", strPossibleRequestId)) { ;MSSolve problem/task
-		StringLeft strRequestId, strPossibleRequestId, 15
-		strRequestId := RegExReplace(strRequestId, "^[2-3]", "1",,1)
-		ToolTip This looks like an problem/task number: %strPossibleRequestId%`n%strMsgActionsSDProblem%`n%strMsgActionPaste%
-		strRequestType := "SD"
-	} else if (RegExMatch(clipContent, "[1][1]\d{13}", strPossibleRequestId)) { ;MSSolve case
+	if (RegExMatch(clipContent, "[1][1-2]\d{14}", strPossibleRequestId)) { ;MSSolve case
 		ToolTip This looks like an SR number: %strPossibleRequestId%`n%strMsgActionsSDCase%`n%strMsgActionPaste%
 		strRequestType := "SD"
 		strRequestId := strPossibleRequestId
